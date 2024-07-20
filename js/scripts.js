@@ -1,6 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
-    fetchPosts();
+    const homeLink = document.getElementById('home-link');
+    homeLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        loadHomePage();
+    });
+
+    loadHomePage();
 });
+
+function loadHomePage() {
+    document.getElementById('content').innerHTML = `
+        <h2>Blog Posts</h2>
+        <div id="posts"></div>
+    `;
+    fetchPosts();
+}
 
 function fetchPosts() {
     fetch('posts/posts.json')
@@ -12,7 +26,7 @@ function fetchPosts() {
                 postElement.innerHTML = `
                     <h3>${post.title}</h3>
                     <p>${post.excerpt}</p>
-                    <a href="${post.url}" class="read-more" data-post-url="${post.url}">Read more</a>
+                    <a href="#" class="read-more" data-post-url="${post.url}">Read more</a>
                 `;
                 postsDiv.appendChild(postElement);
             });
@@ -30,7 +44,11 @@ function addReadMoreEventListeners() {
                 .then(response => response.text())
                 .then(markdown => {
                     const contentDiv = document.getElementById('content');
-                    contentDiv.innerHTML = marked.parse(markdown);
+                    contentDiv.innerHTML = `
+                        <button id="back-button">Back to Home</button>
+                        ${marked.parse(markdown)}
+                    `;
+                    document.getElementById('back-button').addEventListener('click', loadHomePage);
                 });
         });
     });
