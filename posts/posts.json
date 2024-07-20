@@ -1,0 +1,14 @@
+{
+    "posts": [
+        {
+            "title": "First Post",
+            "excerpt": "This is the excerpt of the first post.",
+            "url": "posts/post1.md"
+        },
+        {
+            "title": "Second Post",
+            "excerpt": "This is the excerpt of the second post.",
+            "url": "posts/post2.md"
+        }
+    ]
+}
