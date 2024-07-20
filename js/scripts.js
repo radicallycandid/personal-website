@@ -44,11 +44,7 @@ function addReadMoreEventListeners() {
                 .then(response => response.text())
                 .then(markdown => {
                     const contentDiv = document.getElementById('content');
-                    contentDiv.innerHTML = `
-                        <button id="back-button">Back to Home</button>
-                        ${marked.parse(markdown)}
-                    `;
-                    document.getElementById('back-button').addEventListener('click', loadHomePage);
+                    contentDiv.innerHTML = marked.parse(markdown);
                 });
         });
     });
